@@ -3,13 +3,13 @@ package Geo::Coder::TomTom;
 use strict;
 use warnings;
 
-use Carp qw(carp croak);
+use Carp qw(croak);
 use JSON;
 use LWP::UserAgent;
 use URI;
 use URI::Escape qw(uri_escape_utf8);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 $VERSION = eval $VERSION;
 
 sub new {
@@ -128,23 +128,23 @@ list context it returns all location results.
 
 Each location result is a hashref; a typical example looks like:
 
-{
-    category         => 7373,
-    city             => "Hollywood",
-    country          => "United States",
-    countryISO3      => "USA",
-    formattedAddress => "Hollywood & Highland, Hollywood, CA, US",
-    geohash          => "9q5cgpgrfetr",
-    heightMeters     => 0,
-    latitude         => "34.10154",
-    longitude        => "-118.34015",
-    mapName          => "usacanadaandmexicop",
-    name             => "Hollywood & Highland",
-    score            => 1,
-    state            => "CA",
-    type             => "poi",
-    widthMeters      => 0,
-}
+    {
+        category         => 7373,
+        city             => "Hollywood",
+        country          => "United States",
+        countryISO3      => "USA",
+        formattedAddress => "Hollywood & Highland, Hollywood, CA, US",
+        geohash          => "9q5cgpgrfetr",
+        heightMeters     => 0,
+        latitude         => "34.10154",
+        longitude        => "-118.34015",
+        mapName          => "usacanadaandmexicop",
+        name             => "Hollywood & Highland",
+        score            => 1,
+        state            => "CA",
+        type             => "poi",
+        widthMeters      => 0,
+    }
 
 =head2 response
 
@@ -162,10 +162,11 @@ Accessor for the UserAgent object.
 
 =head1 SEE ALSO
 
-L<http://wiki.openstreetmap.org/wiki/Nominatim>
+L<http://routes.tomtom.com/>
 
-L<Geo::Coder::Bing>, L<Geo::Coder::Google>, L<Geo::Coder::Mapquest>,
-L<Geo::Coder::Multimap>, L<Geo::Coder::OSM>, L<Geo::Coder::Yahoo>
+L<Geo::Coder::Bing>, L<Geo::Coder::Bing::Bulk>, L<Geo::Coder::Google>,
+L<Geo::Coder::Mapquest>, L<Geo::Coder::Multimap>, L<Geo::Coder::Navteq>,
+L<Geo::Coder::OSM>, L<Geo::Coder::PlaceFinder>, L<Geo::Coder::Yahoo>
 
 =head1 REQUESTS AND BUGS
 
