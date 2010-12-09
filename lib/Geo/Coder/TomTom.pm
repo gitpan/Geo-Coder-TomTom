@@ -9,7 +9,7 @@ use LWP::UserAgent;
 use URI;
 use URI::Escape qw(uri_escape_utf8);
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 $VERSION = eval $VERSION;
 
 sub new {
@@ -18,7 +18,7 @@ sub new {
 
     my $self = bless \ %params, $class;
 
-    $self->{apikey} ||= '55849048-cbd2-4bfc-a7b4-83acbebecf3d';
+    $self->{apikey} ||= '1e2099c7-eea9-476b-aac9-b20dc7100af1';
 
     if ($params{ua}) {
         $self->ua($params{ua});
@@ -79,7 +79,10 @@ sub geocode {
     my $data = eval { from_json($content) };
     return unless $data;
 
-    my @results = @{$data->{geoResponse}{geoResult} || []};
+    # Result is a list only if there is more than one item.
+    my $results = $data->{geoResponse}{geoResult};
+    my @results = 'ARRAY' eq ref $results ? @$results : ($results);
+
     return wantarray ? @results : $results[0];
 }
 
@@ -166,7 +169,8 @@ L<http://routes.tomtom.com/>
 
 L<Geo::Coder::Bing>, L<Geo::Coder::Bing::Bulk>, L<Geo::Coder::Google>,
 L<Geo::Coder::Mapquest>, L<Geo::Coder::Multimap>, L<Geo::Coder::Navteq>,
-L<Geo::Coder::OSM>, L<Geo::Coder::PlaceFinder>, L<Geo::Coder::Yahoo>
+L<Geo::Coder::OSM>, L<Geo::Coder::PlaceFinder>, L<Geo::Coder::SimpleGeo>,
+L<Geo::Coder::Yahoo>
 
 =head1 REQUESTS AND BUGS
 
@@ -203,7 +207,7 @@ L<http://rt.cpan.org/Public/Dist/Display.html?Name=Geo-Coder-TomTom>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/Geo-Coder-TomTom>
+L<http://search.cpan.org/dist/Geo-Coder-TomTom/>
 
 =back
 
